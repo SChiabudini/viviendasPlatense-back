@@ -1,12 +1,13 @@
 const House = require('../../collections/House');
 
-const postHouseCtrl = async (type, size, price, image) => {
+const postHouseCtrl = async (type, size, price, images, rooms) => {
   
     const newHouse = {
       type,
       size,
       price,
-      image
+      images,
+      rooms
     }
 
     const createdHouse = await House.create(newHouse);

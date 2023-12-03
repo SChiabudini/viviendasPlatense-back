@@ -16,9 +16,13 @@ const houseSchema = new Schema({
         require: true
     },
     
-    image: {
-        type: String,
+    images: {
+        type: [String],
         require: true
+    },
+
+    rooms: {
+        type: String
     }
 });
 
