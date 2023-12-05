@@ -1,10 +1,11 @@
 const Portfolio = require('../../collections/Portfolio');
 
-const postPortfolioCtrl = async (text, image) => {
+const postPortfolioCtrl = async (text, image, video) => {
   
     const newPortfolio = {
         text,
-        image
+        image,
+        video
     }
 
     const createdPortfolio = await Portfolio.create(newPortfolio);

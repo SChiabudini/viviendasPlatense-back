@@ -1,18 +1,19 @@
 const putPortfolioCtrl = require('../../controllers/portfolioCtrls/putPortfolioCtrl');
 
 const putPortfolioHandler = async (req, res) => {
-    const { _id, text, image } = req.body;
+    const { _id, text, image, video } = req.body;
     try {
       if(!_id) res.status(400).json({ error: 'Missing ID' });
 
       if (
         (text && typeof text !== 'string') ||
-        (image && typeof image !== 'string')
+        (image && typeof image !== 'string') ||
+        (video && typeof video !== 'string')
     ){
         return res.status(400).send({ error: 'Incorrect DataType' });
       }
       
-      const portfolioUpdate = await putPortfolioCtrl(_id, text, image)
+      const portfolioUpdate = await putPortfolioCtrl(_id, text, image, video)
     
       return res.status(200).send('Publication had been updated');
 

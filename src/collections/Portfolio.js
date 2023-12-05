@@ -6,8 +6,11 @@ const portfolioSchema = new Schema({
     },
     
     image: {
-        type: String,
-        require: true
+        type: String
+    },
+
+    video: {
+        type: String
     }
 });
 
