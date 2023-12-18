@@ -1,10 +1,10 @@
 const postHouseCtrl = require('../../controllers/houseCtrls/postHouseCtrl');
 
 const postHouseHandler = async (req, res) => {
-  const { type, size, price, images, rooms } = req.body;
+  const { type, size, price, images, rooms, description } = req.body;
 
   try {
-    if (!type || !size || !price || !images || !Array.isArray(images) || !rooms) {
+    if (!type || !size || !price || !images || !Array.isArray(images) || !rooms || !description) {
       return res.status(400).send({ error: 'Incorrect DataType or Missing Data' });
     }
 
@@ -28,7 +28,11 @@ const postHouseHandler = async (req, res) => {
       return res.status(400).send({ error: 'Incorrect DataType - type' });
     }
 
-    const newHouse = await postHouseCtrl(type, size, price, images, rooms);
+    if (!description.every((description) => typeof description === 'string')) {
+      return res.status(400).send({ error: 'Incorrect DataType - description' });
+    }
+
+    const newHouse = await postHouseCtrl(type, size, price, images, rooms, description);
 
     res.status(200).send(newHouse);
   } catch (error) {

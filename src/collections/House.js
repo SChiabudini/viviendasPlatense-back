@@ -23,6 +23,10 @@ const houseSchema = new Schema({
 
     rooms: {
         type: String
+    },
+
+    description: {
+        type: [String]
     }
 });
 
