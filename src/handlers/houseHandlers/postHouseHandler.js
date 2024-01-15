@@ -4,7 +4,7 @@ const postHouseHandler = async (req, res) => {
   const { type, size, price, images, rooms, description } = req.body;
 
   try {
-    if (!type || !size || !price || !images || !Array.isArray(images) || !rooms || !description) {
+    if (!type || !size || !price || !images || !Array.isArray(images) || !description) {
       return res.status(400).send({ error: 'Incorrect DataType or Missing Data' });
     }
 
@@ -22,10 +22,6 @@ const postHouseHandler = async (req, res) => {
 
     if (!images.every((image) => typeof image === 'string')) {
       return res.status(400).send({ error: 'Incorrect DataType - images' });
-    }
-
-    if (typeof rooms !== 'string') {
-      return res.status(400).send({ error: 'Incorrect DataType - type' });
     }
 
     if (!description.every((description) => typeof description === 'string')) {
