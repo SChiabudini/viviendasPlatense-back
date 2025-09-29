@@ -4,15 +4,18 @@ const House = require('../../collections/House');
 const getHousesCtrl = async () => {
     const houses = await House.find();
 
-    // Reordenar las casas: las de tipo "eco" al inicio, el resto en el orden original.
     const sortedHouses = houses.sort((a, b) => {
-        if (a.type === 'Eco' && b.type !== 'Eco') {
-            return -1; // "eco" antes de otros
+        // 1️⃣ Priorizar "Eco" sobre los demás
+        if (a.type === 'Eco' && b.type !== 'Eco') return -1;
+        if (a.type !== 'Eco' && b.type === 'Eco') return 1;
+
+        // 2️⃣ Si ambos son "Eco", ordenar por tamaño ascendente
+        if (a.type === 'Eco' && b.type === 'Eco') {
+            return a.size - b.size;
         }
-        if (a.type !== 'Eco' && b.type === 'Eco') {
-            return 1; // otros después de "eco"
-        }
-        return 0; // mantener el orden original entre elementos no "eco"
+
+        // 3️⃣ Si ninguno es "Eco", mantener el orden original
+        return 0;
     });
 
     return sortedHouses;
